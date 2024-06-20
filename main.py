@@ -1,6 +1,6 @@
 from funciones import *
 
-bool = pantalla_principal(resolucion)
+retorno = pantalla_principal(resolucion)
 
-if bool == True:
-    pantalla_juego(resolucion)
+if retorno[0] == True:
+    pantalla_juego(retorno[1])

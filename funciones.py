@@ -25,11 +25,12 @@ def pantalla_principal(resolucion:tuple) -> None | bool:
     pygame.init()
 
     ventana = pygame.display.set_mode(resolucion)
+
     pygame.display.set_caption("NOMBRE DEL JUEGO")
 
     corriendo = True
 
-    ventana.blit(imagen_1, (posicion_foto_x, posicion_foto_y))  
+    imagen_inicio = imagen_1
 
     while corriendo:
 
@@ -41,6 +42,18 @@ def pantalla_principal(resolucion:tuple) -> None | bool:
 
                 corriendo = False
 
+            elif evento.type == pygame.MOUSEMOTION:
+
+                mouse_x = evento.pos[0]
+
+                mouse_y = evento.pos[1]
+
+                imagen_inicio = imagen_1
+
+                if posicion_foto_x <= mouse_x <= posicion_foto_x + dimension_foto_x and posicion_foto_y <= mouse_y <= posicion_foto_y + dimension_foto_y:
+
+                    imagen_inicio = imagen_2
+
             elif evento.type == pygame.MOUSEBUTTONDOWN:
 
                 mouse_x = evento.pos[0]
@@ -49,28 +62,24 @@ def pantalla_principal(resolucion:tuple) -> None | bool:
 
                 if posicion_foto_x <= mouse_x <= posicion_foto_x + dimension_foto_x and posicion_foto_y <= mouse_y <= posicion_foto_y + dimension_foto_y:
 
-                    ventana.blit(imagen_2, (posicion_foto_x, posicion_foto_y))
-
                     pygame.display.update()
 
                     reloj.tick(5)
 
-                    return True
-        
+                    return True, ventana
+
+            ventana.blit(imagen_inicio, (posicion_foto_x, posicion_foto_y))
+
         pygame.display.update()
-
 #---------------------------------------------------------------------------------------------------------------------------------
-def pantalla_juego(resolucion:tuple) -> None:
+def pantalla_juego(ventana) -> None:
 
-    reloj.tick(FPS) 
-
-    ventana = pygame.display.set_mode(resolucion)
-
-    pygame.display.set_caption("NOMBRE DEL JUEGO")
+    ventana.fill("Black")
 
     corriendo = True
-
     while corriendo:
+
+        reloj.tick(FPS) 
 
         lista_eventos = pygame.event.get()
         
