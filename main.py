@@ -125,7 +125,6 @@ def pantalla_principal(resolucion:tuple) -> None:
     
 pantalla_principal(resolucion)
 
-
 """
 -----------------------------------------------------------------------------------------------------------------
 IDEA DE TEMPORIZADOR
