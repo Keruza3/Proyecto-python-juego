@@ -1,0 +1,7 @@
+{
+    "partidas_jugadores": [["Partida_1", "Partida_2"],
+                           ["Partida_3", "Partida_4"]],
+
+    "puntaje": [[0,0],
+                [0,0]]
+}
