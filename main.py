@@ -1,6 +1,8 @@
-from funciones import *
+from pantallas import *
 
-retorno = pantalla_principal(resolucion)
+ventana = pantalla_inicio()
 
-if retorno[0] == True:
-    pantalla_juego(retorno[1])
+if ventana != None:
+    
+    pantalla_juego(ventana)
+
