@@ -1,8 +1,9 @@
 import pygame
+import random
 from configuraciones import *
 
 
-def pantalla_inicio()-> None:
+def pantalla_inicio()-> None | tuple:
 
     pygame.init()
 
@@ -67,7 +68,7 @@ def pantalla_inicio()-> None:
     
         pygame.display.update()
     
-def pantalla_seleccion_partida(ventana) -> None:    
+def pantalla_seleccion_partida(ventana) -> None | tuple:    
 
     ventana.fill("Black")
 
@@ -215,22 +216,31 @@ def pantalla_seleccion_partida(ventana) -> None:
 
         pygame.display.update()
 
-def pantalla_ingresar_nombre(ventana) -> None:
+def pantalla_ingresar_nombre(ventana) -> None | tuple:
 
     ventana.fill("Black")
+
     texto_usuario = ""
+
     corriendo = True
-    contador = 0
+    
+    fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 80)
 
-    fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 32)
+    fuente_dialogo = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 24)
 
-    caja_texto = pygame.Rect(200,200, 140, 32)
+    evento_dialogo_largo = pygame.USEREVENT + 1 # el mas uno hace q este evento sea unico (es por si queremos hacer otro evento) 
+
+    pygame.time.set_timer(evento_dialogo_largo, 1000)
+
+    contador_segundos_dialogo = 0
 
     while corriendo:
 
         reloj.tick(FPS) 
-
+    
         lista_eventos = pygame.event.get()
+
+        contador_carteres = len(texto_usuario)
 
         for evento in lista_eventos:
 
@@ -238,24 +248,47 @@ def pantalla_ingresar_nombre(ventana) -> None:
 
                 corriendo = False
 
-            if evento.type == pygame.KEYDOWN:
+            elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_BACKSPACE:
 
-                    if contador >= 0:
-                        contador -= 1
+                    if contador_carteres > 0:
+                        
                         texto_usuario = texto_usuario[0 :-1] #no va el 0 porque python sabe que es un 0
+
+                elif evento.key == pygame.K_RETURN and texto_usuario != "":
+
+                    return ventana, texto_usuario
+
                 else:
-                    if contador <= 7: #revisar no funciona muy bien  https://youtu.be/Rvcyf4HsWiw?t=760
-                        texto_usuario += evento.unicode
-                        contador += 1
+                    if 0 <= contador_carteres < 5 and evento.key != pygame.K_RETURN: #revisar no funciona muy bien  https://youtu.be/Rvcyf4HsWiw?t=760
+                        texto_usuario += evento.unicode   
+
+            elif evento.type == evento_dialogo_largo:
+
+                contador_segundos_dialogo += 1 
+
+                if contador_segundos_dialogo == 10:
+                    contador_segundos_dialogo = 0
 
         ventana.fill("Black")
-        ventana.blit(fondo_cambio_nombre, posicion_fondo)
-        pygame.draw.rect(ventana, "Blue", caja_texto, 2)
+        ventana.blit(fondo_pantalla_inicial, posicion_fondo)
+        ventana.blit(cuadro_cambio_nombre, (posicion_cuadro_cambio_nombre_x, posicion_cuadro_cambio_nombre_y))
+        ventana.blit(personaje, (posicion_personaje_x, posicion_personaje_y))
+
+        if contador_segundos_dialogo > 5:  
+            ventana.blit(dialogo_largo, (posicion_dialogo_largo_x, posicion_dialogo_largo_y))
+        
+            texto_dialogo_1 = fuente_dialogo.render("Ingresa el nombre", True, "Black")
+            ventana.blit(texto_dialogo_1, (posicion_texto_dialogo_largo_x , posicion_texto_dialogo_largo_y))
+
+            texto_dialogo_2 = fuente_dialogo.render("de la partida", True, "Black")
+            ventana.blit(texto_dialogo_2, (posicion_texto_dialogo_largo_x , posicion_texto_2_dialogo_largo_y))
+
         texto_superficie = fuente_base.render(texto_usuario, True, "Black")
-        ventana.blit(texto_superficie, (caja_texto.x + 5, caja_texto.y + 5)) #se le agrega 5 para que el texto no se sobreponga con el borde del rectangulo
+        ventana.blit(texto_superficie, (posicion_texto_cambio_nombre_x + 5, posicion_texto_cambio_nombre_y + 5)) #se le agrega 5 para que el texto no se sobreponga con el borde del rectangulo
 
         pygame.display.update()
+
 pygame.quit()
 
 

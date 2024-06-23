@@ -12,4 +12,3 @@ def leer_datos_almacenados()-> tuple:
 
 
     return matriz_patidas, matriz_puntaje
-
