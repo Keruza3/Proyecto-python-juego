@@ -12,8 +12,7 @@ if ventana != None:
         nombre_partida = pantalla_seleccion[1]
         puntaje_partida = pantalla_seleccion[2]
         path_skin = pantalla_seleccion[3]
-        tiempo_record = pantalla_seleccion[4]
-        nombre_base = pantalla_seleccion[5]
+        nombre_base = pantalla_seleccion[4]
         personaje = cargar_escalar_imagen_personajes(path_skin, dimension_personaje_x, dimension_personaje_y)
         
         iniciar_juego = True
@@ -51,8 +50,6 @@ if ventana != None:
             bandera_fin_juego = False
 
             jugando = True
-            
-            acumulador_tiempo = 0
 
             tiempo_promedios = None
 
@@ -63,13 +60,14 @@ if ventana != None:
                 if primera_partida_jugada == True:
                     tiempo_promedios = tiempo_promedio(acumulador_tiempo, contador_niveles)
 
-                sala_espera = pantalla_sala_espera(ventana, personaje, puntaje_partida, tiempo_record, tiempo_promedios)
+                sala_espera = pantalla_sala_espera(ventana, personaje, puntaje_partida, tiempo_promedios)
 
                 match sala_espera:
                     case "jugar":
                             
                             vidas = 5
                             lista_marcas = aleatorizar_marcas()
+                            acumulador_tiempo = 0
                             
                             for i in range(len(lista_marcas)):
 
@@ -112,14 +110,19 @@ if ventana != None:
                             break
 
                     case "salir":   
-
-                        guardar_datos_json(nombre_partida, nombre_nuevo_partida, puntaje_partida, path_skin, tiempo_promedios, tiempo_record)
+                        
+                        guardar_datos_json(nombre_partida, nombre_nuevo_partida, puntaje_partida, path_skin)
                         pygame.quit()
                         break
 
                     case "eliminar":
-                        guardar_datos_json(nombre_partida, nombre_base, 0, "imagenes\\pantalla_selector_skins\\personajes\\humano.png", 0, 0)
-                        break
+                        ventana = pantalla_eliminar_partida(ventana)
+                        if ventana != None:
+                            if ventana == "si":
+                                guardar_datos_json(nombre_partida, nombre_base, 0, "imagenes\\pantalla_selector_skins\\personajes\\humano.png")
+                                break
+                        else:
+                            break
 
                     case None:
                         break

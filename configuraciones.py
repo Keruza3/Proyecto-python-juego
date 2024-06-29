@@ -15,21 +15,14 @@ fuente_pantalla_ingresar_nombre = pygame.font.Font("tipografias\\UltimateGamepla
 #-------------------------------------------------------
 #TOMA DE DATOS POR MATRIZ
 
-tupla_matrices = leer_datos_almacenados() # [0] = partidas | [1] = puntaje
+tupla_matrices = leer_datos_almacenados_json() # [0] = partidas | [1] = puntaje
 
-matrices_nombres_base = tupla_matrices[5]
+matrices_nombres_base = tupla_matrices[4]
 
 nombre_base_partida_primer_partida = matrices_nombres_base[0][0]
 nombre_base_partida_segunda_partida = matrices_nombres_base[0][1]
 nombre_base_partida_tercer_partida = matrices_nombres_base[1][0]
 nombre_base_partida_cuarta_partida = matrices_nombres_base[1][1]
-
-matrices_promedio_record = tupla_matrices[3]
-
-promedio_record_primer_partida = matrices_promedio_record[0][0]
-promedio_record_segunda_partida = matrices_promedio_record[0][1]
-promedio_record_tercer_partida = matrices_promedio_record[1][0]
-promedio_record_cuarta_partida = matrices_promedio_record[1][1]
 
 matrices_personajes = tupla_matrices[2]
 
@@ -44,6 +37,8 @@ puntaje_primer_partida = matrices_puntajes[0][0]
 puntaje_segunda_partida = matrices_puntajes[0][1]
 puntaje_tercer_partida = matrices_puntajes[1][0]
 puntaje_cuarta_partida = matrices_puntajes[1][1]
+
+puntaje_maximo = calcular_puntaje_maximo(matrices_puntajes)
 
 matriz_partidas = tupla_matrices[0]
 
@@ -205,6 +200,9 @@ posicion_cuadro_puntaje_tiempo_y = 25
 
 posicion_boton_borrar_partida_x = 100
 posicion_boton_borrar_partida_y = 310
+
+posicion_volviendo_pantalla_principal_x = 290
+posicion_volviendo_pantalla_principal_y = 600
 #-------------------------------------------------------
 # IMAGENES
 

@@ -1,0 +1,42 @@
+{
+    "partidas_jugadores": [
+        [
+            "Mati",
+            "Partida_2"
+        ],
+        [
+            "Partida_3",
+            "Partida_4"
+        ]
+    ],
+    "puntaje": [
+        [
+            12000,
+            0
+        ],
+        [
+            0,
+            0
+        ]
+    ],
+    "skins": [
+        [
+            "imagenes/pantalla_selector_skins/personajes/la_sombra.png",
+            "imagenes\\pantalla_selector_skins\\personajes\\humano.png"
+        ],
+        [
+            "imagenes\\pantalla_selector_skins\\personajes\\humano.png",
+            "imagenes\\pantalla_selector_skins\\personajes\\humano.png"
+        ]
+    ],
+    "nombres_base": [
+        [
+            "Partida_1",
+            "Partida_2"
+        ],
+        [
+            "Partida_3",
+            "Partida_4"
+        ]
+    ]
+}

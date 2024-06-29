@@ -1,8 +1,13 @@
 import pygame
 from configuraciones import *
 
-def pantalla_inicio()-> None | tuple:
+def pantalla_inicio()-> pygame.Surface | None:
+    """Esta funcion muestra la pantalla principal, en ella se ve un boton de jugar
 
+    Returns:
+        pygame.surface | None: devuelve un none si el usuario cierra la ventantana o una surface
+    """
+    
     pygame.init()
 
     ventana = pygame.display.set_mode(RESOLUCION)
@@ -11,6 +16,7 @@ def pantalla_inicio()-> None | tuple:
 
     pygame.display.set_icon(pygame.image.load("imagenes\\pantalla inicio\\logo del juego.png"))
 
+    #MUSICA
     musica_fondo_sala_espera.stop()
     musica_fondo_inicio.play(-1) # 0 = se ejecute 1 vez | -1 = en bucle
     musica_fondo_inicio.set_volume(volumen_musica)
@@ -19,8 +25,6 @@ def pantalla_inicio()-> None | tuple:
     ventana.blit(fondo_pantalla_inicial, posicion_fondo)
     ventana.blit(logo, (posicion_logo_x,posicicon_logo_y))
     ventana.blit(imagen_iniciar_1, (posicion_foto_x, posicion_foto_y))
-
-    # musica_fondo("musica\\fondo\\musica_inicio.mp3", -1, 0.5)
 
     imagen = True
     contador = 0
@@ -50,8 +54,7 @@ def pantalla_inicio()-> None | tuple:
 
                         ventana.blit(imagen_iniciar_2, (posicion_foto_x, posicion_foto_y))
                         imagen = True
-                    
-                        
+                  
                 else:
                     contador = 0
                     
@@ -59,7 +62,6 @@ def pantalla_inicio()-> None | tuple:
                 
                         ventana.blit(imagen_iniciar_1, (posicion_foto_x, posicion_foto_y))
                         imagen = False
-
 
             elif evento.type == pygame.MOUSEBUTTONDOWN:
 
@@ -78,8 +80,15 @@ def pantalla_inicio()-> None | tuple:
         
         pygame.display.update()
     
-def pantalla_seleccion_partida(ventana) -> None | tuple:    
-    
+def pantalla_seleccion_partida(ventana:pygame.surface) -> pygame.Surface | None:    
+    """Esta funcion muestra en pantalla, las partidas de usuarios anteriores, si es que lo hubieron.
+
+    Args:
+        ventana (pygame.surface): recibe el surface de la pantalla anterior 
+
+    Returns:
+        None | tuple: devuelve None si se cierra la pantalla o devuelve una ventana para la siguiente pantalla
+    """
     ventana.fill("Black")
 
     #SE PEGA EL FONDO Y EL CUADRO PARA SELECCIONAR LAS PARTIDAS
@@ -115,7 +124,7 @@ def pantalla_seleccion_partida(ventana) -> None | tuple:
                 if posicion_selector_1_x <= mouse_x <= (posicion_selector_1_x + dimension_selector_x) and posicion_selector_1_y <= mouse_y <= (posicion_selector_1_y + dimension_selector_y):
                     
                     if contador == 1:
-
+                        
                         sonido_boton_selector.play(0) 
                         sonido_boton_selector.set_volume(volumen_musica)
 
@@ -169,67 +178,44 @@ def pantalla_seleccion_partida(ventana) -> None | tuple:
                 mouse_y = evento.pos[1]
 
                 if posicion_selector_1_x <= mouse_x <= (posicion_selector_1_x + dimension_selector_x) and posicion_selector_1_y <= mouse_y <= (posicion_selector_1_y + dimension_selector_y):
-                    
-                    sonido_boton_clickear.play(0) 
-                    sonido_boton_clickear.set_volume(volumen_musica)
 
-                    partida = primer_partida
-                    puntaje = puntaje_primer_partida
-                    path_personaje = path_personajes_primer_partida
-                    tiempo_promedio_record = promedio_record_primer_partida 
-                    nombre_base = nombre_base_partida_primer_partida
-                    retorno = ventana, partida, puntaje, path_personaje, tiempo_promedio_record, nombre_base
+                    retorno = leer_datos_partida(ventana, primer_partida, puntaje_primer_partida, path_personajes_primer_partida, nombre_base_partida_primer_partida)
                     click_selector = True
 
                 elif posicion_selector_2_x <= mouse_x <= (posicion_selector_2_x + dimension_selector_x) and posicion_selector_2_y <= mouse_y <= (posicion_selector_2_y + dimension_selector_y):
                     
-                    sonido_boton_clickear.play(0) 
-                    sonido_boton_clickear.set_volume(volumen_musica)
-
-                    partida = segunda_partida
-                    puntaje = puntaje_segunda_partida
-                    path_personaje = path_personajes_segunda_partida
-                    tiempo_promedio_record = promedio_record_segunda_partida
-                    nombre_base = nombre_base_partida_segunda_partida
-                    retorno = ventana, partida, puntaje, path_personaje, tiempo_promedio_record, nombre_base
+                    retorno = retorno = leer_datos_partida(ventana, segunda_partida, puntaje_segunda_partida, path_personajes_segunda_partida, nombre_base_partida_segunda_partida)
                     click_selector = True
                 
                 elif posicion_selector_3_x <= mouse_x <= (posicion_selector_3_x + dimension_selector_x) and posicion_selector_3_y <= mouse_y <= (posicion_selector_3_y + dimension_selector_y):
-                    
-                    sonido_boton_clickear.play(0) 
-                    sonido_boton_clickear.set_volume(volumen_musica)
 
-                    partida = tercer_partida
-                    puntaje = puntaje_tercer_partida
-                    path_personaje = path_personajes_tercer_partida
-                    tiempo_promedio_record = promedio_record_tercer_partida 
-                    nombre_base = nombre_base_partida_tercer_partida
-                    retorno = ventana, partida, puntaje, path_personaje, tiempo_promedio_record, nombre_base
+                    retorno = leer_datos_partida(ventana, tercer_partida, puntaje_tercer_partida, path_personajes_tercer_partida, nombre_base_partida_tercer_partida)
                     click_selector = True
 
                 elif posicion_selector_4_x <= mouse_x <= (posicion_selector_4_x + dimension_selector_x) and posicion_selector_4_y <= mouse_y <= (posicion_selector_4_y + dimension_selector_y):
-                    
-                    sonido_boton_clickear.play(0)
-                    sonido_boton_clickear.set_volume(volumen_musica)
-
-                    partida = cuarta_partida
-                    puntaje = puntaje_cuarta_partida
-                    path_personaje = path_personajes_cuarta_partida
-                    tiempo_promedio_record = promedio_record_cuarta_partida 
-                    nombre_base = nombre_base_partida_cuarta_partida
-                    retorno = ventana, partida, puntaje, path_personaje, tiempo_promedio_record, nombre_base
+            
+                    retorno = leer_datos_partida(ventana, cuarta_partida, puntaje_cuarta_partida, path_personajes_cuarta_partida, nombre_base_partida_cuarta_partida)
                     click_selector = True
                     
         if click_selector == True:
-
+            sonido_boton_clickear.play(0)
+            sonido_boton_clickear.set_volume(volumen_musica)
             return retorno
 
         pygame.display.update()
 
-def pantalla_seleccionar_skin(ventana)-> None | tuple:
+def pantalla_seleccionar_skin(ventana:pygame.surface)-> None | tuple:
+    """Esta funcion muestra en pantalla las skins disponibles al usuario
 
+    Args:
+        ventana (pygame.surface): recibe la ventana anterior 
+
+    Returns:
+        None | tuple: Devuelve None si se cierra el o una tupla con los datos de ventana, nombre del usuario y el path del mismo
+    """
     ventana.blit(retrato_selector_skin, (100,25))
 
+    #SE LE ASIGNA EL COLOR A CADA NOMBRE DEL PERSONAJE PARA QUE SE HAGA UN CAMBIO UNICO
     fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 24)
     color_texto_1 = "Black"
     color_texto_2 = "Black"
@@ -238,12 +224,10 @@ def pantalla_seleccionar_skin(ventana)-> None | tuple:
     color_texto_5 = "Black"   
     color_texto_6 = "Black"
 
-    tupla_personajes = leer_datos_personajes()
+    tupla_personajes = leer_datos_personajes_csv()
     
+    # CARGA EL PERSONAJE DEL CSV Y LOS CARGA EN PANTALLA
     for i in range(len(tupla_personajes)):
-        
-        
-
         match i:
             case 0:
                 path_perosnaje_1 = tupla_personajes[i][1]
@@ -291,7 +275,6 @@ def pantalla_seleccionar_skin(ventana)-> None | tuple:
     perosnaje_elegido = False
 
     while corriendo:
-
         reloj.tick(FPS)
         lista_eventos = pygame.event.get()
 
@@ -332,13 +315,6 @@ def pantalla_seleccionar_skin(ventana)-> None | tuple:
             elif evento.type == pygame.MOUSEMOTION:
                 mouse_x = evento.pos[0]
                 mouse_y = evento.pos[1]
-            
-                color_texto_1 = "Black"
-                color_texto_2 = "Black"
-                color_texto_3 = "Black"
-                color_texto_4 = "Black"
-                color_texto_5 = "Black"
-                color_texto_6 = "Black"
 
                 if  posicion_personaje_1_4_x <= mouse_x <= (posicion_personaje_1_4_x + dimension_personaje_x) and posicion_personaje_1_2_3_y <= mouse_y <= (posicion_personaje_1_2_3_y + dimension_personaje_y):
                     color_texto_1 = "Red"
@@ -357,14 +333,22 @@ def pantalla_seleccionar_skin(ventana)-> None | tuple:
                 
                 elif  posicion_personaje_3_6_x <= mouse_x <= (posicion_personaje_3_6_x + dimension_personaje_x) and posicion_personaje_4_5_6_y <= mouse_y <= (posicion_personaje_4_5_6_y + dimension_personaje_y):
                     color_texto_6 = "Red"
-        
+
+                else:
+                    color_texto_1 = "Black"
+                    color_texto_2 = "Black"
+                    color_texto_3 = "Black"
+                    color_texto_4 = "Black"
+                    color_texto_5 = "Black"
+                    color_texto_6 = "Black"
+        #CAMBIO DE COLOR DEPENDIENDO SI SE PASO EL MOUSE POR ARRIBA O NO
         texto_nombre_personaje_1 = fuente_base.render(nombre_personaje_1, False, color_texto_1)
         texto_nombre_personaje_2 = fuente_base.render(nombre_personaje_2, False, color_texto_2)
         texto_nombre_personaje_3 = fuente_base.render(nombre_personaje_3, False, color_texto_3)
         texto_nombre_personaje_4 = fuente_base.render(nombre_personaje_4, False, color_texto_4)
         texto_nombre_personaje_5 = fuente_base.render(nombre_personaje_5, False, color_texto_5)
         texto_nombre_personaje_6 = fuente_base.render(nombre_personaje_6, False, color_texto_6)
-        
+
         ventana.blit(texto_nombre_personaje_1, (posicion_personaje_1_4_x, posicion_nombre_personaje_1_2_3_y))
         ventana.blit(texto_nombre_personaje_2, (posicion_personaje_2_5_x, posicion_nombre_personaje_1_2_3_y))
         ventana.blit(texto_nombre_personaje_3, (posicion_personaje_3_6_x, posicion_nombre_personaje_1_2_3_y))
@@ -379,22 +363,27 @@ def pantalla_seleccionar_skin(ventana)-> None | tuple:
 
         pygame.display.update()
 
-def pantalla_ingresar_nombre(ventana, personaje) -> None | tuple:
+def pantalla_ingresar_nombre(ventana:pygame.surface, personaje) -> None | tuple:
+    """ Esta funcion muestra en pantalla un texto a completar por el usuario, para asignarle un nombre a la partida
 
+    Args:
+        ventana (pygame.surface): recibe el surface de la pantalla anterior
+        personaje (_type_): surface del personaje elegido por el usuario
+    Returns:
+        None | tuple: None si se cierra la pantalla o una tupla con la surface y el texto que ingreso el usuario
+    """
     ventana.fill("Black")
-    
     texto_usuario = ""
-    corriendo = True
-    
     evento_dialogo_largo = pygame.USEREVENT + 1 # el mas uno hace q este evento sea unico (es por si queremos hacer otro evento) 
 
     pygame.time.set_timer(evento_dialogo_largo, 1000)
-
     contador_segundos = 0
 
+    #SE CARGAN LAS TIPOGRAFIAS
     fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 24)
     fuente_pantalla_ingresar_nombre = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 80)
-
+    
+    corriendo = True
     while corriendo:
         reloj.tick(FPS) 
     
@@ -430,7 +419,7 @@ def pantalla_ingresar_nombre(ventana, personaje) -> None | tuple:
                 if contador_segundos == 10:
                     contador_segundos = 0
 
-
+        # SE PEGA CUADRO Y LE TEXT PARA INGRESAR EL NOMBRE
         ventana.fill("Black")
         ventana.blit(fondo_pantalla_ingresar_nombre_partida, posicion_fondo)
         ventana.blit(cuadro_cambio_nombre, (posicion_cuadro_cambio_nombre_x, posicion_cuadro_cambio_nombre_y))
@@ -451,42 +440,60 @@ def pantalla_ingresar_nombre(ventana, personaje) -> None | tuple:
 
         pygame.display.update()
 
-def pantalla_sala_espera(ventana, personaje, puntaje:int, tiempo_record:float, tiempo_promedio:float)-> None | tuple:
-    
+def pantalla_sala_espera(ventana:pygame.surface, personaje, puntaje:int, tiempo_promedio:float)-> None | tuple:
+    """ Esta funcion muestra en pantalla 4 botones (Salir, Skins, Jugar y Borrar Partida) un leaderboard mostrando las monedas actuales, puntaje maximo blobal 
+    y el promedio que tardo en responder las preguntas.
+
+    Args:
+        ventana (pygame.surface): recibe el surface de la pantalla anterior
+        personaje (_type_): surface del personaje elegido por el usuario
+        puntaje (int): El puntaje actual del usuario
+        tiempo_promedio (float): El timpo promedio que tardo el usuario en responder 
+
+    Returns:
+        None | tuple: None si se cierra la ventana o devuelve una tupla con ("eliminar", "jugar", "skins")
+    """
     ventana.fill("Black")
     ventana.blit(fondo_pantalla_ingresar_nombre_partida, posicion_fondo)
     
+    #SE TRANSFORMAN LOS CUADRO DE TEXTO A UNA ESCALA QUE ES SOLO PARA ESTA PANTLLA
     cuadro_texto =  pygame.transform.scale(cuadro_cambio_nombre, (dimension_cuadro_opciones_x, dimension_cuadro_opciones_y))
     cuadro_contraste_texto =  pygame.transform.scale(cuadro_texto_contraste, (dimension_cuadro_opciones_x, dimension_cuadro_opciones_y))
     
+    #BLITEO DE LOS BOTONES EN PANTALLA (SE IMPRIME ACA TAMBIEN PORQUE SINO NO APARECEN CUANDO ENTRAMOS A LA PANTALLA)
     ventana.blit(personaje, (posicion_personaje_x, posicion_personaje_y))
     ventana.blit(cuadro_texto,(posicion_cuadro_1_sala_espera_x, posicion_cuadro_sala_espera_y)) 
     ventana.blit(cuadro_texto,(posicion_cuadro_2_sala_espera_x, posicion_cuadro_sala_espera_y))
     ventana.blit(cuadro_texto,(posicion_cuadro_3_sala_espera_x, posicion_cuadro_sala_espera_y))
 
+    #BLITEO DE EL LEADERBORD
     ventana.blit(cuadro_puntaje_tiempo,(posicion_cuadro_puntaje_tiempo_x, posicion_cuadro_puntaje_tiempo_y))
     ventana.blit(boton_borrar_partida,(posicion_boton_borrar_partida_x, posicion_boton_borrar_partida_y))
 
+    #TEXTO Y POSCICION DE MONEDAS ACTUALES
     fuente = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 24)
     texto_puntaje = fuente.render(str(puntaje), False, "Black")
-    ventana.blit(texto_puntaje, (posicion_monedas_x + 100, posicion_monedas_y + 10))
+    ventana.blit(texto_puntaje, (posicion_monedas_x + 90, posicion_monedas_y + 10))
     ventana.blit(monedas, (posicion_monedas_x + 45, posicion_monedas_y))
-
-    texto_titulo_tiempo_record = fuente.render("Tiempo Record", False, "Black")
-    texto_tiempo_record = fuente.render(f"{tiempo_record} seg", False, "Black")
-    texto_titulo_tiempo_promedio = fuente.render("Tiempo Promedio", False, "Black")
-
+    
+    #TEXTO Y POSICION DE RECORD MONEDAS
+    texto_titulo_punaje_maximo = fuente.render("Puntaje Global", False, "Black")
+    texto_texto_maximo = fuente.render("Max", False, "Black")
+    texto_puntaje_maximo = fuente.render(str(puntaje_maximo), False, "Black")
+    texto_titulo_tiempo_promedio = fuente.render("Tiempo Previo", False, "Black")
+    ventana.blit(texto_titulo_punaje_maximo,(posicion_monedas_x + 45, posicion_monedas_y + 50))
+    ventana.blit(texto_texto_maximo,(posicion_monedas_x + 100, posicion_monedas_y + 78))
+    ventana.blit(texto_puntaje_maximo,(posicion_monedas_x + 90, posicion_monedas_y + 107))
+    
+    #TEXTO Y POSICION DE TIEMPO PREVIO
     if tiempo_promedio == None:
-        tiempo_promedio = "No se ah jugado"
+        tiempo_promedio = "No se ha jugado"
         posicion_tiempo_promedio_x = posicion_monedas_x + 45
     else:
         posicion_tiempo_promedio_x = posicion_monedas_x + 110
         tiempo_promedio = f"{tiempo_promedio} seg"
 
     texto_tiempo_promedio = fuente.render(tiempo_promedio, False, "Black")
-
-    ventana.blit(texto_titulo_tiempo_record,(posicion_monedas_x + 45, posicion_monedas_y + 50))
-    ventana.blit(texto_tiempo_record,(posicion_monedas_x + 110, posicion_monedas_y + 100))
 
     ventana.blit(texto_titulo_tiempo_promedio,(posicion_monedas_x + 45, posicion_monedas_y + 150))
     ventana.blit(texto_tiempo_promedio,(posicion_tiempo_promedio_x, posicion_monedas_y + 200))
@@ -501,8 +508,7 @@ def pantalla_sala_espera(ventana, personaje, puntaje:int, tiempo_record:float, t
     SKINS = fuente_grande.render("SKINS", False, "Black")
     SALIR = fuente_grande.render("SALIR", False, "Black")
 
-
-    #Musica
+    #MUSICA
     musica_fondo_inicio.stop()
     musica_fondo_cambio_nombre.stop()
     musica_fondo_sala_espera.stop()
@@ -572,14 +578,13 @@ def pantalla_sala_espera(ventana, personaje, puntaje:int, tiempo_record:float, t
                     retorno = "eliminar"
                     boton_clickeado = True
                     
-
-        
         #SE BLITEA EL FONDO Y LOS BOTONES DE LAS OPCIONES
         if boton_clickeado == True:
             sonido_boton_clickear.play(0) 
             sonido_boton_clickear.set_volume(volumen_musica)
             return retorno
         
+        #SE PEGA LOS TEXTOS DE LOS BOTONES Y DEL LEADERBOARD
         ventana.blit(texto_eliminar, (posicion_boton_borrar_partida_x + 30, posicion_boton_borrar_partida_y + 30))
         ventana.blit(texto_partida, (posicion_boton_borrar_partida_x + 30, posicion_boton_borrar_partida_y + 60))
         ventana.blit(JUGAR, (posicion_cuadro_3_sala_espera_x + 65, posicion_cuadro_sala_espera_y + 50))
@@ -587,53 +592,192 @@ def pantalla_sala_espera(ventana, personaje, puntaje:int, tiempo_record:float, t
         ventana.blit(SALIR, (posicion_cuadro_1_sala_espera_x + 65, posicion_cuadro_sala_espera_y + 50))
         
         pygame.display.update() 
+
+def pantalla_eliminar_partida(ventana:pygame.surface) -> pygame.surface:
+    """Esta funcion muestra en pantalla un cuadro de confirmacion de que si se queire borrar la partida o no
+
+    Args:
+        ventana (pygame.surface): recibe el surface de la pantalla anterior
+
+    Returns:
+        pygame.surface: devuele solo el surface 
+    """
+    ventana.blit(retrato_selector_skin, (100,25))
+
+    fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 48)
+    fuente_aviso = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 24)
     
-def pantalla_game_over(ventana, puntaje:int, tiempo_tardado: int)-> str | None:
+    texto_pegunta = fuente_base.render("¿Estas seguro de elimiar la partida?", False, "Black")
+    posicion_texto_pregunta_eliminar_x = 270
+    posicion_texto_pregunta_eliminar_y = 230
+    ventana.blit(texto_pegunta,(posicion_texto_pregunta_eliminar_x, posicion_texto_pregunta_eliminar_y))
 
-    ventana.fill("Black")
+    color_si = "Red"
+    color_no = "Green"
+    
+    texto_si = fuente_base.render("SI", False, "Black", color_si)
+    texto_no = fuente_base.render("NO", False, "Black", color_no)
 
-    #SE PEGA LA IMAGEN DEL GAME OVER    
-    ventana.blit(imagen_game_over, posicion_fondo)
+    posicion_texto_si_eliminar_x = 420
+    posicion_texto_no_eliminar_x = 720
+    posicion_texto_si_no_eliminar_y = 400
 
-    musica_fondo_cambio_nombre.stop()
-    sonido_game_over.play(0)
-    sonido_game_over.set_volume(volumen_musica)
+    dimesion_texto_si_no_eliminar_x = 48
+    dimesion_texto_si_no_eliminar_y = 48
 
-    evento_cerrar_pantalla = pygame.USEREVENT + 2
-    pygame.time.set_timer(evento_cerrar_pantalla, 8000)
+    ventana.blit(texto_si, (posicion_texto_si_eliminar_x, posicion_texto_si_no_eliminar_y))
+    ventana.blit(texto_no, (posicion_texto_no_eliminar_x , posicion_texto_si_no_eliminar_y))
+
+    texto_aviso = fuente_aviso.render("(Se cerrara el juego)", False, "Black")
+    ventana.blit(texto_aviso, (posicion_texto_si_eliminar_x - 80, posicion_texto_si_no_eliminar_y + 70))
+
+    boton_clikeado = False
     
     corriendo = True
+    
     while corriendo:
-
         reloj.tick(FPS)
-
         lista_eventos = pygame.event.get()
 
         for evento in lista_eventos:
             if evento.type == pygame.QUIT:
 
                 corriendo = False
-            
+
+            elif evento.type == pygame.MOUSEMOTION:
+
+                mouse_x = evento.pos[0]
+                mouse_y = evento.pos[1]
+                    
+                if (posicion_texto_si_eliminar_x <= mouse_x <= (posicion_texto_si_eliminar_x + dimesion_texto_si_no_eliminar_x) and
+                    posicion_texto_si_no_eliminar_y <= mouse_y <= (posicion_texto_si_no_eliminar_y + dimesion_texto_si_no_eliminar_y)):
+                
+                    color_si = "White"
+    
+                elif (posicion_texto_no_eliminar_x <= mouse_x <= (posicion_texto_no_eliminar_x + dimesion_texto_si_no_eliminar_x) and
+                    posicion_texto_si_no_eliminar_y <= mouse_y <= (posicion_texto_si_no_eliminar_y + dimesion_texto_si_no_eliminar_y)):
+                    
+                    color_no = "White"
+
+                else:
+                    color_si = "Red"
+                    color_no = "Green"
+                    
+            elif evento.type == pygame.MOUSEBUTTONDOWN:
+
+                mouse_x = evento.pos[0]
+                mouse_y = evento.pos[1]
+                    
+                if (posicion_texto_si_eliminar_x <= mouse_x <= (posicion_texto_si_eliminar_x + dimesion_texto_si_no_eliminar_x) and
+                    posicion_texto_si_no_eliminar_y <= mouse_y <= (posicion_texto_si_no_eliminar_y + dimesion_texto_si_no_eliminar_y)):
+                
+                    retorno = "si"
+                    boton_clikeado = True
+                
+                elif (posicion_texto_no_eliminar_x <= mouse_x <= (posicion_texto_no_eliminar_x + dimesion_texto_si_no_eliminar_x) and
+                    posicion_texto_si_no_eliminar_y <= mouse_y <= (posicion_texto_si_no_eliminar_y + dimesion_texto_si_no_eliminar_y)):
+                    
+                    retorno = ventana
+                    boton_clikeado = True
+
+                else:
+                    color_si = "Red"
+                    color_no = "Green"
+        
+        texto_si = fuente_base.render("SI", False, "Black", color_si)
+        texto_no = fuente_base.render("NO", False, "Black", color_no)
+        ventana.blit(texto_si, (posicion_texto_si_eliminar_x, posicion_texto_si_no_eliminar_y))
+        ventana.blit(texto_no, (posicion_texto_no_eliminar_x , posicion_texto_si_no_eliminar_y))
+
+        if boton_clikeado == True:
+            return retorno
+        
+        pygame.display.update()
+        
+def pantalla_game_over(ventana:pygame.surface, puntaje:int, tiempo_tardado:int)-> str | None:
+    """Esta funcion muestra en pantalla una imagen (en este caso que dice "GAME OVER") y un sonido (que en este caso dice "GAME OVER").
+
+    Args:
+        ventana (pygame.surface): Recibe el surface de la pantalla anterior.
+        puntaje (int): Es el puntaje que tiene el usuario.
+        tiempo_tardado (int): El tiempo promedio que tardo el usuario en contestar.
+
+    Returns:
+        str | None: Devuelve el str "perdiste" o en caso que se cierre la ventana / surface devuelve un None.
+    """
+    ventana.fill("Black")
+
+    #SE PEGA LA IMAGEN DEL GAME OVER
+    ventana.blit(imagen_game_over, posicion_fondo)
+
+    #SE CARGA LA MUSICA
+    musica_fondo_cambio_nombre.stop()
+    sonido_game_over.play(0)
+    sonido_game_over.set_volume(volumen_musica)
+
+    evento_volviendo_inicio = pygame.USEREVENT + 3
+    evento_cerrar_pantalla = pygame.USEREVENT + 2
+    pygame.time.set_timer(evento_volviendo_inicio, 4000)
+    pygame.time.set_timer(evento_cerrar_pantalla, 8000)
+
+    fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 48)
+    
+    texto_volviendo_pantalla_principal = fuente_base.render("volviendo a la pantalla principal...", False, "Black", "White")
+
+    volviendo_pantantalla = False
+
+    corriendo = True
+
+    while corriendo:
+
+        reloj.tick(FPS)
+        lista_eventos = pygame.event.get()
+
+        for evento in lista_eventos:
+            if evento.type == pygame.QUIT:
+                corriendo = False
+
+            elif evento.type == evento_volviendo_inicio:
+                volviendo_pantantalla = True
+
             elif evento.type == evento_cerrar_pantalla:
                 sonido_game_over.stop()
                 return "perdiste", ventana, puntaje, tiempo_tardado
-            
+        
+        if volviendo_pantantalla == True:
+
+            ventana.blit(texto_volviendo_pantalla_principal, (posicion_volviendo_pantalla_principal_x, posicion_volviendo_pantalla_principal_y))
         pygame.display.update()
 
-def pantalla_winner(ventana)-> None:
+def pantalla_winner(ventana:pygame.surface)-> None | pygame.Surface:
+    """Esta funcion muestra en pantalla una imagen (en este caso que dice "YOU WIN") y un sonido.
 
+    Args:
+        ventana (pygame.surface): Recibe el surface de la pantalla anterior.
+
+    Returns:
+        None | pygame.Surface : Devuelve la ventana en caso de la cierre devuelve un None.
+    """
     ventana.fill("Black")
 
     #SE PEGA LA IMAGEN DEL GAME OVER    
     ventana.blit(imagen_winner, posicion_fondo)
 
+    # SE INICIA LA MUSICA
     musica_fondo_cambio_nombre.stop()
     sonido_winner.play(0)
     sonido_winner.set_volume(volumen_musica)
 
+    evento_volviendo_inicio = pygame.USEREVENT + 3
     evento_cerrar_pantalla = pygame.USEREVENT + 2
+    pygame.time.set_timer(evento_volviendo_inicio, 2000)
     pygame.time.set_timer(evento_cerrar_pantalla, 6000)
-    
+
+    fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 48)
+    texto_volviendo_pantalla_principal = fuente_base.render("volviendo a la pantalla principal...", False, "White", "Black")
+
+    volviendo_pantantalla = False
+
     corriendo = True
     while corriendo:
 
@@ -646,14 +790,35 @@ def pantalla_winner(ventana)-> None:
 
                 corriendo = False
             
+            elif evento.type == evento_volviendo_inicio:
+                volviendo_pantantalla = True
+            
             elif evento.type == evento_cerrar_pantalla:
                 sonido_game_over.stop()
                 return ventana
+        
+        if volviendo_pantantalla == True:
+
+            ventana.blit(texto_volviendo_pantalla_principal, (posicion_volviendo_pantalla_principal_x, posicion_volviendo_pantalla_principal_y))
             
         pygame.display.update()
 
-def pantalla_juego(ventana, puntaje:int, vidas:int, marca:str, personaje, contador_niveles:int)-> None | tuple:
+def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, personaje, contador_niveles:int)-> None | tuple:
+    """Esta funcion muestra en pantalla una imagen que cumple el rol de fondo (de pantalla), un cronometro para cada nivel, vidas actuaes del jugador, puntaje total de la partida,
+    y cuatro imagenes de logos (que cumplen el rol de botones) al seleccionar una u otra se le descontaran / sumaran puntos, descontaran vidas, en caso de que el cronometro llegue a 0 
+    se restara una vida y saldra de la funcion, en caso de que las vidas queden en 0 se llamara a la funcion mostrar_pantalla_game_over y cambiara el valor de retorno.
 
+    Args:
+        ventana (pygame.surface): Recibe el surface de la pantalla anterior.
+        puntaje (int): recibe el puntaje actual del jugador
+        vidas (int): recibe las vidas que tiene el jugador
+        marca (str): recibe una marca aleatoria de una list
+        personaje (_type_): surface del personaje elegido por el usuario
+        contador_niveles (int): el contador de los niveves que paso el usuario
+
+    Returns:
+        None | tuple: devuelve None si se cierra la ventana o devuelve un una tupla las variables de (ventana, puntaje, tiempo_tardado)
+    """
     if contador_niveles == 1:
         musica_fondo_sala_espera.stop()
         musica_fondo_cambio_nombre.play(-1)
@@ -791,7 +956,7 @@ def pantalla_juego(ventana, puntaje:int, vidas:int, marca:str, personaje, contad
         ventana.blit(texto_dialogo_marca, (posicion_texto_dialogo_largo_x - 45, posicion_texto_dialogo_largo_y + 15))
         
         #BLIT DE LAS MONEDAS
-        texto_puntaje = fuente.render(str(puntaje), False, "Black", "White")
+        texto_puntaje = fuente.render(str(puntaje), False, "Black", "Yellow")
         ventana.blit(texto_puntaje, (posicion_monedas_x + 50, posicion_monedas_y + 10))
         ventana.blit(monedas, (posicion_monedas_x, posicion_monedas_y))
 
@@ -838,3 +1003,4 @@ def pantalla_juego(ventana, puntaje:int, vidas:int, marca:str, personaje, contad
             return retorno
         
         pygame.display.update()
+
