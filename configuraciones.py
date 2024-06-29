@@ -1,33 +1,64 @@
 import pygame
 from funciones import *
 
+pygame.init()
+
 FPS = 120
 reloj = pygame.time.Clock() 
 
-# #-------------------------------------------------------
-# #TIPOGRAFIA
+#-------------------------------------------------------
+#TIPOGRAFIA
 
-# fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 20)
+fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 24)
+fuente_pantalla_ingresar_nombre = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 80)
 
-# #-------------------------------------------------------
-# #TOMA DE DATOS POR MATRIZ
+#-------------------------------------------------------
+#TOMA DE DATOS POR MATRIZ
 
-# tupla_matrices = leer_datos_almacenados() # [0] = partidas | [1] = puntaje
+tupla_matrices = leer_datos_almacenados() # [0] = partidas | [1] = puntaje
 
-# matriz_partidas = tupla_matrices[0]
+matrices_nombres_base = tupla_matrices[5]
 
-# primer_partida = matriz_partidas[0][0]
-# segunda_partida = matriz_partidas[0][1]
-# tercer_partida = matriz_partidas[1][0]
-# cuarta_partida = matriz_partidas[1][1]
+nombre_base_partida_primer_partida = matrices_nombres_base[0][0]
+nombre_base_partida_segunda_partida = matrices_nombres_base[0][1]
+nombre_base_partida_tercer_partida = matrices_nombres_base[1][0]
+nombre_base_partida_cuarta_partida = matrices_nombres_base[1][1]
 
-# #---------------------------------------
-# #RENDERIZACION
+matrices_promedio_record = tupla_matrices[3]
 
-# texto_primer_partida = fuente_base.render(primer_partida, False, "Black")
-# texto_segunda_partida = fuente_base.render(primer_partida, False, "Black")
-# texto_tercer_partida = fuente_base.render(primer_partida, False, "Black")
-# texto_cuarta_partida = fuente_base.render(primer_partida, False, "Black")
+promedio_record_primer_partida = matrices_promedio_record[0][0]
+promedio_record_segunda_partida = matrices_promedio_record[0][1]
+promedio_record_tercer_partida = matrices_promedio_record[1][0]
+promedio_record_cuarta_partida = matrices_promedio_record[1][1]
+
+matrices_personajes = tupla_matrices[2]
+
+path_personajes_primer_partida = matrices_personajes[0][0]
+path_personajes_segunda_partida = matrices_personajes[0][1]
+path_personajes_tercer_partida = matrices_personajes[1][0]
+path_personajes_cuarta_partida = matrices_personajes[1][1]
+
+matrices_puntajes = tupla_matrices[1]
+
+puntaje_primer_partida = matrices_puntajes[0][0]
+puntaje_segunda_partida = matrices_puntajes[0][1]
+puntaje_tercer_partida = matrices_puntajes[1][0]
+puntaje_cuarta_partida = matrices_puntajes[1][1]
+
+matriz_partidas = tupla_matrices[0]
+
+primer_partida = matriz_partidas[0][0]
+segunda_partida = matriz_partidas[0][1]
+tercer_partida = matriz_partidas[1][0]
+cuarta_partida = matriz_partidas[1][1]
+
+#---------------------------------------
+#RENDERIZACION
+
+texto_primer_partida = fuente_base.render(primer_partida, False, "Black")
+texto_segunda_partida = fuente_base.render(segunda_partida, False, "Black")
+texto_tercer_partida = fuente_base.render(tercer_partida, False, "Black")
+texto_cuarta_partida = fuente_base.render(cuarta_partida, False, "Black")
 
 #-------------------------------------------------------
 #RESOLUCION DE LA PANTALLA
@@ -39,11 +70,11 @@ RESOLUCION = (ANCHO, ALTURA)
 #-------------------------------------------------------
 #DIMENSIONES DE LAS FOTOS
 
-dimension_foto_x = 1204 / 3
+dimension_foto_x = 1204 / 4
 dimension_foto_y = 523 / 4
 
-dimension_logo_x = 1204 / 1.3
-dimension_logo_y = 303 / 1.3
+dimension_logo_x = 500
+dimension_logo_y = 400
 
 dimension_cuadro_x = 400
 dimension_cuadro_y = 400
@@ -51,8 +82,8 @@ dimension_cuadro_y = 400
 dimension_selector_x = 150
 dimension_selector_y = 150
 
-dimension_cuadro_cambio_nombre_x = 600
-dimension_cuadro_cambio_nombre_y = 200
+dimension_cuadro_cambio_nombre_x = 550
+dimension_cuadro_cambio_nombre_y = 150
 
 dimension_personaje_x = 70
 dimension_personaje_y = 100
@@ -60,61 +91,120 @@ dimension_personaje_y = 100
 dimension_dialogo_largo_x = 250
 dimension_dialogo_largo_y = 80
 
+dimension_marcos_logos_x = 1000
+dimension_marcos_logos_y = 200
+
+dimension_vidas_x = 250
+dimension_vidas_y = 50
+
+dimension_monedas_x = 40
+dimension_monedas_y = 40
+
+dimension_cronometro_x = 150
+dimension_cronometro_y = 130
+
+dimension_cuadro_opciones_x = 350
+dimension_cuadro_opciones_y = 150
+
+dimension_cuadro_puntaje_tiempo_x = 300
+dimension_cuadro_puntaje_tiempo_y = 450
+
+dimension_boton_borrar_partida_x = 150
+dimension_boton_borrar_partida_y = 100
 
 #-------------------------------------------------------
 #POSICION DE LAS FOTOS
 
-posicion_foto_x = ANCHO / 3
-posicion_foto_y = ALTURA / 1.35
+posicion_foto_x = ANCHO / 2.7
+posicion_foto_y = ALTURA / 1.5
 
-posicion_logo_x = ANCHO / 7.5
-posicicon_logo_y = ALTURA / 14
+posicion_logo_x = ANCHO / 3.5
+posicicon_logo_y = ALTURA / 12
 
 posicion_fondo = (0,0)
 
 posicion_cuadro_x = ANCHO / 3
-posicion_cuadro_y = ALTURA / 2.5
+posicion_cuadro_y = ALTURA / 4.5
 
 posicion_selector_1_x = ANCHO / 2.7234
-posicion_selector_1_y = ALTURA / 2.1818
+posicion_selector_1_y = ALTURA / 3.56
 
 posicion_selector_2_x = ANCHO / 2.0317
-posicion_selector_2_y = ALTURA / 2.1818
+posicion_selector_2_y = ALTURA / 3.56
 
 posicion_selector_3_x = ANCHO / 2.7234
-posicion_selector_3_y = ALTURA / 1.4516
+posicion_selector_3_y = ALTURA / 1.956
 
 posicion_selector_4_x = ANCHO / 2.0317
-posicion_selector_4_y = ALTURA / 1.4516
+posicion_selector_4_y = ALTURA / 1.956
 
 posicion_texto_partida_1_x = ANCHO / 2.5859
-posicion_texto_partida_1_y = ALTURA / 1.8
+posicion_texto_partida_1_y = ALTURA / 2.7
 
 posicion_texto_partida_2_x = ANCHO / 1.9542
-posicion_texto_partida_2_y = ALTURA / 1.8
+posicion_texto_partida_2_y = ALTURA / 2.7
 
 posicion_texto_partida_3_x = ANCHO / 2.5859
-posicion_texto_partida_3_y = ALTURA / 1.272
+posicion_texto_partida_3_y = ALTURA / 1.65
 
 posicion_texto_partida_4_x = ANCHO / 1.9542
-posicion_texto_partida_4_y = ALTURA / 1.272
+posicion_texto_partida_4_y = ALTURA / 1.65
 
-posicion_cuadro_cambio_nombre_x = ANCHO / 4
-posicion_cuadro_cambio_nombre_y = ALTURA / 1.35
+posicion_cuadro_cambio_nombre_x = ANCHO / 3.7
+posicion_cuadro_cambio_nombre_y = ALTURA / 1.405
 
 posicion_texto_cambio_nombre_x = ANCHO / 3.35
-posicion_texto_cambio_nombre_y = ALTURA / 1.22
+posicion_texto_cambio_nombre_y = ALTURA / 1.29
 
-posicion_personaje_x = ANCHO / 1.3
-posicion_personaje_y = ALTURA / 2.14
+posicion_personaje_x = ANCHO / 2.2
+posicion_personaje_y = ALTURA / 1.85
 
-posicion_dialogo_largo_x = ANCHO / 1.7
-posicion_dialogo_largo_y = ALTURA / 2.7
+posicion_dialogo_largo_x = ANCHO / 3.75
+posicion_dialogo_largo_y = ALTURA / 2.2
 
-posicion_texto_dialogo_largo_x = ANCHO / 1.63
-posicion_texto_dialogo_largo_y = ALTURA / 2.6
-posicion_texto_2_dialogo_largo_y = ALTURA / 2.45
+posicion_texto_dialogo_largo_x = ANCHO / 3.5
+posicion_texto_dialogo_largo_y = ALTURA / 2.1
+posicion_texto_2_dialogo_largo_y = ALTURA / 2
 
+posicion_marcos_logos_x = ANCHO / 8.5
+posicion_marcos_logos_y = ALTURA / 1.43
+
+posicion_imagen_juego_1 = (170,520)
+posicion_imagen_juego_2 = (425,520)
+posicion_imagen_juego_3 = (683,520)
+posicion_imagen_juego_4 = (938,520)
+
+posicion_monedas_x = ANCHO / 27
+posicion_monedas_y = ALTURA / 9
+
+posicion_cronometro_x = ANCHO / 4.5
+posicion_cronometro_y = ALTURA / 50
+
+posicion_vidas_x = ANCHO / 30
+posicion_vidas_y = ALTURA / 30
+
+posicion_cuadro_1_sala_espera_x = ANCHO / 40
+posicion_cuadro_2_sala_espera_x = ANCHO / 2.96296
+posicion_cuadro_3_sala_espera_x = ANCHO / 1.53846
+posicion_cuadro_sala_espera_y = ALTURA / 1.35
+
+dimension_retrato_x = ANCHO / 1.2
+dimension_retrato_y = ALTURA / 1.1
+
+posicion_personaje_1_4_x = 325
+posicion_personaje_2_5_x = 600
+posicion_personaje_3_6_x = 875
+posicion_personaje_1_2_3_y = 180
+posicion_personaje_4_5_6_y = 355
+
+posicion_nombre_personaje_1_2_3_y = 145
+posicion_nombre_personaje_4_5_6_y = 320
+
+posicion_cuadro_puntaje_tiempo_x = 25
+posicion_cuadro_puntaje_tiempo_y = 25
+
+posicion_boton_borrar_partida_x = 100
+posicion_boton_borrar_partida_y = 310
 #-------------------------------------------------------
 # IMAGENES
 
@@ -127,16 +217,40 @@ fondo_pantalla_inicial = pygame.image.load("imagenes\\pantalla inicio\\fondo_pan
 
 fondo_pantalla_selector_partida = pygame.image.load("imagenes\\pantalla selector partidas\\fondo_seleccion_partida.jpg")
 
+fondo_pantalla_ingresar_nombre_partida = pygame.image.load("imagenes\\pantalla cambio de nombre\\pantalla_cambio_nombre.jpg")
+
 cuadro_selector_partida = pygame.image.load("imagenes\\pantalla selector partidas\\slots_partidas.png")
 
 selector_partida = pygame.image.load("imagenes\\pantalla selector partidas\\selector.png")
 
 cuadro_cambio_nombre = pygame.image.load("imagenes\\pantalla cambio de nombre\\cuadro de texto.png")
 
-personaje = pygame.image.load("imagenes\\personaje_1.png")
+cuadro_texto_contraste = pygame.image.load("imagenes\\pantalla cambio de nombre\\cuadro_texto_contraste.png")
 
 dialogo_largo = pygame.image.load("imagenes\\dialogos\\dialogo_largo.png")
 
+marcos_logos = pygame.image.load("imagenes\\pantalla juegos\\marcos_logos.png")
+
+monedas = pygame.image.load("imagenes\\pantalla juegos\\moneda.png")
+
+cronometro = pygame.image.load("imagenes\\pantalla juegos\\cronometro.png")
+
+vidas_5 = pygame.image.load("imagenes\\vidas\\vida_1.png")
+vidas_4 = pygame.image.load("imagenes\\vidas\\vida_2.png")
+vidas_3 = pygame.image.load("imagenes\\vidas\\vida_3.png")
+vidas_2 = pygame.image.load("imagenes\\vidas\\vida_4.png")
+vidas_1 = pygame.image.load("imagenes\\vidas\\vida_5.png")
+
+imagen_game_over = pygame.image.load("imagenes\\pantalla_game_over_winner\\game_over.jpg")
+imagen_winner = pygame.image.load("imagenes\\pantalla_game_over_winner\\win.png")
+
+retrato_selector_skin = pygame.image.load("imagenes\\pantalla_selector_skins\\selector_skins.png")
+
+cuadro_puntaje_tiempo = pygame.image.load("imagenes\\pantalla_sala_espera\\cuadro_puntaje_tiempo.png")
+
+boton_borrar_partida = pygame.image.load("imagenes\\pantalla_sala_espera\\boton_borrar_personaje.png")
+
+boton_borrar_partida_contraste = pygame.image.load("imagenes\\pantalla_sala_espera\\boton_borrar_personaje_contraste.png")
 #--------------------------------------------
 # ESCALAS 
 
@@ -149,21 +263,69 @@ fondo_pantalla_inicial = pygame.transform.scale(fondo_pantalla_inicial, (RESOLUC
 
 fondo_pantalla_selector_partida = pygame.transform.scale(fondo_pantalla_selector_partida, (RESOLUCION))
 
+fondo_pantalla_ingresar_nombre_partida = pygame.transform.scale(fondo_pantalla_ingresar_nombre_partida, (RESOLUCION))
+
 cuadro_selector_partida = pygame.transform.scale(cuadro_selector_partida, (dimension_cuadro_x, dimension_cuadro_y))
+
+cuadro_texto_contraste = pygame.transform.scale(cuadro_texto_contraste, (dimension_cuadro_x, dimension_cuadro_y))
 
 selector_partida = pygame.transform.scale(selector_partida, (dimension_selector_x, dimension_selector_y))
 
 cuadro_cambio_nombre = pygame.transform.scale(cuadro_cambio_nombre, (dimension_cuadro_cambio_nombre_x, dimension_cuadro_cambio_nombre_y))
 
-personaje = pygame.transform.scale(personaje, (dimension_personaje_x, dimension_personaje_y))
-
 dialogo_largo = pygame.transform.scale(dialogo_largo, (dimension_dialogo_largo_x, dimension_dialogo_largo_y))
 
+marcos_logos = pygame.transform.scale(marcos_logos, (dimension_marcos_logos_x, dimension_marcos_logos_y))
+
+escala_imagenes_adividar = (190,165)
+
+monedas = pygame.transform.scale(monedas, (dimension_monedas_x, dimension_monedas_y))
+
+cronometro = pygame.transform.scale(cronometro, (dimension_cronometro_x, dimension_cronometro_y))
+
+vidas_5 = pygame.transform.scale(vidas_5, (dimension_vidas_x, dimension_vidas_y))
+vidas_4 = pygame.transform.scale(vidas_4, (dimension_vidas_x, dimension_vidas_y))
+vidas_3 = pygame.transform.scale(vidas_3, (dimension_vidas_x, dimension_vidas_y))
+vidas_2 = pygame.transform.scale(vidas_2, (dimension_vidas_x, dimension_vidas_y))
+vidas_1 = pygame.transform.scale(vidas_1, (dimension_vidas_x, dimension_vidas_y))
+
+imagen_game_over = pygame.transform.scale(imagen_game_over, RESOLUCION)
+
+imagen_winner = pygame.transform.scale(imagen_winner, RESOLUCION)
+
+retrato_selector_skin = pygame.transform.scale(retrato_selector_skin, (dimension_retrato_x,dimension_retrato_y))
+
+cuadro_puntaje_tiempo = pygame.transform.scale(cuadro_puntaje_tiempo, (dimension_cuadro_puntaje_tiempo_x ,dimension_cuadro_puntaje_tiempo_y))
+
+boton_borrar_partida = pygame.transform.scale(boton_borrar_partida, (dimension_boton_borrar_partida_x ,dimension_boton_borrar_partida_y))
+
+boton_borrar_partida_contraste = pygame.transform.scale(boton_borrar_partida_contraste, (dimension_boton_borrar_partida_x ,dimension_boton_borrar_partida_y))
+
 #--------------------------------------------
-# CAMBIOS DE EJE (FLIPs)
+# CAMBIOS DE EJE (FLIP)
 
 dialogo_largo = pygame.transform.flip(dialogo_largo , True, False)
 
-# imagen_steve = pygame.transform.flip(imagen_steve, True, False)
+#--------------------------------------------
+# MUSICA
 
-# pygame.time.set_timer(pygame.USEREVENT, 1000) # Cada 1000 milisegundos se dispara este evento
+################
+#VOLUMEN
+volumen_musica = 0.5
+################
+
+musica_fondo_inicio = pygame.mixer.Sound("musica\\fondo\\musica_inicio.mp3")
+musica_fondo_cambio_nombre = pygame.mixer.Sound("musica\\fondo\\musica_cambio_nombre.mp3")
+musica_fondo_sala_espera = pygame.mixer.Sound("musica\\fondo\\musica_sala_espera.mp3")
+musica_fondo_juego = pygame.mixer.Sound("musica\\fondo\\musica_juego.mp3")
+
+sonido_boton_clickear = pygame.mixer.Sound("musica\\botones\\musica_clickear.mp3")
+sonido_boton_selector = pygame.mixer.Sound("musica\\botones\\musica_selector.mp3")
+
+sonido_respuesta_correcta = pygame.mixer.Sound("musica\\respuesta\\sonido_respuesta_correcta.mp3")
+sonido_respuesta_incorrecta = pygame.mixer.Sound("musica\\respuesta\\sonido_respuesta_incorrecta.mp3")
+
+sonido_game_over = pygame.mixer.Sound("musica\\victoria_derrota\\sonido_game_over.mp3")
+sonido_winner = pygame.mixer.Sound("musica\\victoria_derrota\\sonido_win.mp3")
+
+sonido_poco_tiempo = pygame.mixer.Sound("musica\\sonido_queda_poco_tiempo.mp3")

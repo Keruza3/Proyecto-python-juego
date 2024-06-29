@@ -1,0 +1,3 @@
+como importar una fuente de forma correcta?
+como ajustar la resocuion de forma automatica?
+hay que definir el color o se puede usar los que nos trae python por default?

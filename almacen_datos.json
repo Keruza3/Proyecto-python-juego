@@ -1,7 +1,52 @@
 {
-    "partidas_jugadores": [["Partida_1", "Partida_2"],
-                           ["Partida_3", "Partida_4"]],
-
-    "puntaje": [[0,0],
-                [0,0]]
+    "partidas_jugadores": [
+        [
+            "Edu\r",
+            "Partida_2"
+        ],
+        [
+            "Partida_3",
+            "miky"
+        ]
+    ],
+    "puntaje": [
+        [
+            1090,
+            0
+        ],
+        [
+            0,
+            510
+        ]
+    ],
+    "skins": [
+        [
+            "imagenes/pantalla_selector_skins/personajes/humano.png",
+            "imagenes\\pantalla_selector_skins\\personajes\\humano.png"
+        ],
+        [
+            "imagenes\\pantalla_selector_skins\\personajes\\humano.png",
+            "imagenes/pantalla_selector_skins/personajes/dragon.png"
+        ]
+    ],
+    "tiempo_record": [
+        [
+            0.4,
+            0
+        ],
+        [
+            0,
+            0
+        ]
+    ],
+    "nombres_base": [
+        [
+            "Partida_1",
+            "Partida_2"
+        ],
+        [
+            "Partida_3",
+            "Partida_4"
+        ]
+    ]
 }
