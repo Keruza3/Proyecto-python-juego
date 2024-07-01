@@ -35,11 +35,11 @@ Mouse: Navegar por los menús y seleccionar opciones
 
 # Imagenes
 
-![Game Over](imagenes/fotos_readme/game_over.jpg)
-![Gameplay](imagenes/fotos_readme/gameplay.jpg)
-![Menu Juego](imagenes/fotos_readme/menu_juego.jpg)
 ![Menu Principal](imagenes/fotos_readme/menu_principal.jpg)
-![Nombre de Partida](imagenes/fotos_readme/Nombre_de_partida.jpg)
 ![Selector de Partidas](imagenes/fotos_readme/Selector_de_partidas.jpg)
+![Nombre de Partida](imagenes/fotos_readme/Nombre_de_partida.jpg)
+![Menu Juego](imagenes/fotos_readme/menu_juego.jpg)
 ![Selector de Skins](imagenes/fotos_readme/selector_de_skins.jpg)
+![Gameplay](imagenes/fotos_readme/gameplay.jpg)
 ![You Win](imagenes/fotos_readme/you_win.jpg)
+![Game Over](imagenes/fotos_readme/game_over.jpg)
