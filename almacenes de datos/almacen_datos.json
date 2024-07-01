@@ -1,7 +1,7 @@
 {
     "partidas_jugadores": [
         [
-            "Prueb",
+            "Partida_1",
             "Partida_2"
         ],
         [
@@ -11,7 +11,7 @@
     ],
     "puntaje": [
         [
-            350,
+            0,
             0
         ],
         [
@@ -21,7 +21,7 @@
     ],
     "skins": [
         [
-            "imagenes/pantalla_selector_skins/personajes/panda.png",
+            "imagenes\\pantalla_selector_skins\\personajes\\humano.png",
             "imagenes\\pantalla_selector_skins\\personajes\\humano.png"
         ],
         [
