@@ -48,7 +48,7 @@ tercer_partida = matriz_partidas[1][0]
 cuarta_partida = matriz_partidas[1][1]
 
 #---------------------------------------
-#RENDERIZACION
+#RENDERIZACION (la mayoria de renders restantes no aparecen aca ya que tiene cambios dentro de sus parametros)
 
 texto_primer_partida = fuente_base.render(primer_partida, False, "Black")
 texto_segunda_partida = fuente_base.render(segunda_partida, False, "Black")
@@ -65,58 +65,60 @@ RESOLUCION = (ANCHO, ALTURA)
 #-------------------------------------------------------
 #DIMENSIONES DE LAS FOTOS
 
-dimension_foto_x = 1204 / 4
-dimension_foto_y = 523 / 4
+dimension_foto_x = ANCHO / 4.25
+dimension_foto_y = ALTURA / 5.4885
 
-dimension_logo_x = 500
-dimension_logo_y = 400
+dimension_logo_x = ANCHO / 2.56
+dimension_logo_y = ALTURA / 1.8
 
-dimension_cuadro_x = 400
-dimension_cuadro_y = 400
+dimension_cuadro_x = ANCHO / 3.2
+dimension_cuadro_y = ALTURA / 1.8
 
-dimension_selector_x = 150
-dimension_selector_y = 150
+dimension_selector_x = ANCHO / 8.53
+dimension_selector_y = ALTURA / 4.8
 
-dimension_cuadro_cambio_nombre_x = 550
-dimension_cuadro_cambio_nombre_y = 150
+dimension_cuadro_cambio_nombre_x = ANCHO / 2.327
+dimension_cuadro_cambio_nombre_y = ALTURA / 4.8
 
-dimension_personaje_x = 70
-dimension_personaje_y = 100
+dimension_personaje_x = ANCHO / 18.29
+dimension_personaje_y = ALTURA / 7.2
 
-dimension_dialogo_largo_x = 250
-dimension_dialogo_largo_y = 80
+dimension_dialogo_largo_x = ANCHO / 5.12
+dimension_dialogo_largo_y = ALTURA / 9
 
-dimension_marcos_logos_x = 1000
-dimension_marcos_logos_y = 200
+dimension_marcos_logos_x = ANCHO / 1.28
+dimension_marcos_logos_y = ALTURA / 3.6
 
-dimension_vidas_x = 250
-dimension_vidas_y = 50
+dimension_vidas_x = ANCHO / 5.12
+dimension_vidas_y = ALTURA / 14.4
 
-dimension_monedas_x = 40
-dimension_monedas_y = 40
+dimension_monedas_x = ANCHO / 32
+dimension_monedas_y = ALTURA / 18
 
-dimension_cronometro_x = 150
-dimension_cronometro_y = 130
+dimension_cronometro_x = ANCHO / 8.53
+dimension_cronometro_y = ALTURA / 5.5385
 
-dimension_cuadro_opciones_x = 350
-dimension_cuadro_opciones_y = 150
+dimension_cuadro_opciones_x = ANCHO / 3.6571
+dimension_cuadro_opciones_y = ALTURA / 4.8
 
-dimension_cuadro_puntaje_tiempo_x = 300
-dimension_cuadro_puntaje_tiempo_y = 450
+dimension_cuadro_puntaje_tiempo_x = ANCHO / 4.2667
+dimension_cuadro_puntaje_tiempo_y = ALTURA / 1.6
 
-dimension_boton_borrar_partida_x = 150
-dimension_boton_borrar_partida_y = 100
+dimension_boton_borrar_partida_x = ANCHO / 8.53
+dimension_boton_borrar_partida_y = ALTURA / 7.2
 
+diemnsion_imagenes_adividar_x = ANCHO / 6.7368
+diemnsion_imagenes_adividar_y = ALTURA / 4.3636
 #-------------------------------------------------------
 #POSICION DE LAS FOTOS
+
+posicion_fondo = (0,0)
 
 posicion_foto_x = ANCHO / 2.7
 posicion_foto_y = ALTURA / 1.5
 
 posicion_logo_x = ANCHO / 3.5
 posicicon_logo_y = ALTURA / 12
-
-posicion_fondo = (0,0)
 
 posicion_cuadro_x = ANCHO / 3
 posicion_cuadro_y = ALTURA / 4.5
@@ -164,10 +166,11 @@ posicion_texto_2_dialogo_largo_y = ALTURA / 2
 posicion_marcos_logos_x = ANCHO / 8.5
 posicion_marcos_logos_y = ALTURA / 1.43
 
-posicion_imagen_juego_1 = (170,520)
-posicion_imagen_juego_2 = (425,520)
-posicion_imagen_juego_3 = (683,520)
-posicion_imagen_juego_4 = (938,520)
+posicion_imagen_juego_1_x = 170
+posicion_imagen_juego_2_x = 425
+posicion_imagen_juego_3_x = 683
+posicion_imagen_juego_4_x = 938
+posicion_imagen_juego_1_2_3_4_y = 520
 
 posicion_monedas_x = ANCHO / 27
 posicion_monedas_y = ALTURA / 9
@@ -186,23 +189,24 @@ posicion_cuadro_sala_espera_y = ALTURA / 1.35
 dimension_retrato_x = ANCHO / 1.2
 dimension_retrato_y = ALTURA / 1.1
 
-posicion_personaje_1_4_x = 325
-posicion_personaje_2_5_x = 600
-posicion_personaje_3_6_x = 875
-posicion_personaje_1_2_3_y = 180
-posicion_personaje_4_5_6_y = 355
+posicion_personaje_1_4_x = ANCHO / 3.9385
+posicion_personaje_2_5_x = ANCHO / 2.1333
+posicion_personaje_3_6_x = ANCHO / 1.4629
+posicion_personaje_1_2_3_y = ALTURA / 4
+posicion_personaje_4_5_6_y = ALTURA / 2.0282
 
-posicion_nombre_personaje_1_2_3_y = 145
-posicion_nombre_personaje_4_5_6_y = 320
+posicion_nombre_personaje_1_2_3_y = ALTURA / 4.9655
+posicion_nombre_personaje_4_5_6_y = ALTURA / 2.25
 
-posicion_cuadro_puntaje_tiempo_x = 25
-posicion_cuadro_puntaje_tiempo_y = 25
+posicion_cuadro_puntaje_tiempo_x = ANCHO / 51.2
+posicion_cuadro_puntaje_tiempo_y = ALTURA / 28.8
 
-posicion_boton_borrar_partida_x = 100
-posicion_boton_borrar_partida_y = 310
+posicion_boton_borrar_partida_x = ANCHO / 12.8
+posicion_boton_borrar_partida_y = ALTURA / 2.3226
 
-posicion_volviendo_pantalla_principal_x = 290
-posicion_volviendo_pantalla_principal_y = 600
+posicion_volviendo_pantalla_principal_x = ANCHO / 4.4138
+posicion_volviendo_pantalla_principal_y = ALTURA / 1.2
+
 #-------------------------------------------------------
 # IMAGENES
 
@@ -275,8 +279,6 @@ dialogo_largo = pygame.transform.scale(dialogo_largo, (dimension_dialogo_largo_x
 
 marcos_logos = pygame.transform.scale(marcos_logos, (dimension_marcos_logos_x, dimension_marcos_logos_y))
 
-escala_imagenes_adividar = (190,165)
-
 monedas = pygame.transform.scale(monedas, (dimension_monedas_x, dimension_monedas_y))
 
 cronometro = pygame.transform.scale(cronometro, (dimension_cronometro_x, dimension_cronometro_y))
@@ -313,9 +315,8 @@ volumen_musica = 0.5
 ################
 
 musica_fondo_inicio = pygame.mixer.Sound("musica\\fondo\\musica_inicio.mp3")
-musica_fondo_cambio_nombre = pygame.mixer.Sound("musica\\fondo\\musica_cambio_nombre.mp3")
-musica_fondo_sala_espera = pygame.mixer.Sound("musica\\fondo\\musica_sala_espera.mp3")
 musica_fondo_juego = pygame.mixer.Sound("musica\\fondo\\musica_juego.mp3")
+musica_fondo_sala_espera = pygame.mixer.Sound("musica\\fondo\\musica_sala_espera.mp3")
 
 sonido_boton_clickear = pygame.mixer.Sound("musica\\botones\\musica_clickear.mp3")
 sonido_boton_selector = pygame.mixer.Sound("musica\\botones\\musica_selector.mp3")

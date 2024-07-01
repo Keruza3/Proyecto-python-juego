@@ -1,10 +1,10 @@
 from pantallas import *
 
-ventana = pantalla_inicio() 
+ventana = mostrar_pantalla_inicio() 
 
 if ventana != None:
 
-    pantalla_seleccion = pantalla_seleccion_partida(ventana)
+    pantalla_seleccion = mostrar_pantalla_seleccion_partida(ventana)
 
     if pantalla_seleccion != None:
 
@@ -24,7 +24,7 @@ if ventana != None:
             nombre_partida == "Partida_3" or 
             nombre_partida == "Partida_4"):
 
-            pantalla_seleccion_perosnaje = pantalla_seleccionar_skin(ventana)
+            pantalla_seleccion_perosnaje = mostrar_pantalla_seleccionar_skin(ventana)
 
             if pantalla_seleccion_perosnaje != None:
 
@@ -33,7 +33,7 @@ if ventana != None:
                 personaje = pantalla_seleccion_perosnaje[1]
                 path_skin = pantalla_seleccion_perosnaje[2]
 
-                pantalla_nombre = pantalla_ingresar_nombre(ventana, personaje)
+                pantalla_nombre = mostrar_pantalla_ingresar_nombre(ventana, personaje)
 
                 if pantalla_nombre != None:
 
@@ -60,7 +60,7 @@ if ventana != None:
                 if primera_partida_jugada == True:
                     tiempo_promedios = tiempo_promedio(acumulador_tiempo, contador_niveles)
 
-                sala_espera = pantalla_sala_espera(ventana, personaje, puntaje_partida, tiempo_promedios)
+                sala_espera = mostrar_pantalla_sala_espera(ventana, personaje, puntaje_partida, tiempo_promedios)
 
                 match sala_espera:
                     case "jugar":
@@ -74,7 +74,7 @@ if ventana != None:
                                 contador_niveles = i + 1
                                 primera_partida_jugada = True
                                 marca = lista_marcas[i]
-                                juego = pantalla_juego(ventana, puntaje_partida, vidas, marca, personaje, contador_niveles)
+                                juego = mostrar_pantalla_juego(ventana, puntaje_partida, vidas, marca, personaje, contador_niveles)
 
                                 if juego != None:
 
@@ -90,7 +90,7 @@ if ventana != None:
                                         vidas = juego[2]
                                         acumulador_tiempo += juego[3]
                                         if contador_niveles == 15:
-                                            ventana = pantalla_winner(ventana)
+                                            ventana = mostrar_pantalla_winner(ventana)
 
                                     else:
                                         jugando = False
@@ -100,7 +100,7 @@ if ventana != None:
                                     break
                             
                     case "skins":
-                        pantalla_seleccion_perosnaje = pantalla_seleccionar_skin(ventana)
+                        pantalla_seleccion_perosnaje = mostrar_pantalla_seleccionar_skin(ventana)
 
                         if pantalla_seleccion_perosnaje != None:
                             ventana = pantalla_seleccion_perosnaje[0]
@@ -116,7 +116,7 @@ if ventana != None:
                         break
 
                     case "eliminar":
-                        ventana = pantalla_eliminar_partida(ventana)
+                        ventana = mostrar_pantalla_eliminar_partida(ventana)
                         if ventana != None:
                             if ventana == "si":
                                 guardar_datos_json(nombre_partida, nombre_base, 0, "imagenes\\pantalla_selector_skins\\personajes\\humano.png")

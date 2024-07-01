@@ -1,7 +1,7 @@
 import pygame
 from configuraciones import *
 
-def pantalla_inicio()-> pygame.Surface | None:
+def mostrar_pantalla_inicio()-> pygame.Surface | None:
     """Esta funcion muestra la pantalla principal, en ella se ve un boton de jugar
 
     Returns:
@@ -26,8 +26,6 @@ def pantalla_inicio()-> pygame.Surface | None:
     ventana.blit(logo, (posicion_logo_x,posicicon_logo_y))
     ventana.blit(imagen_iniciar_1, (posicion_foto_x, posicion_foto_y))
 
-    imagen = True
-    contador = 0
     corriendo = True
     boton_jugar_clickeado = False
 
@@ -42,26 +40,18 @@ def pantalla_inicio()-> pygame.Surface | None:
                 corriendo = False
 
             elif evento.type == pygame.MOUSEMOTION:
-                
-                contador = 1
 
                 mouse_x = evento.pos[0]
 
                 mouse_y = evento.pos[1]
 
                 if posicion_foto_x <= mouse_x <= (posicion_foto_x + dimension_foto_x) and posicion_foto_y <= mouse_y <= (posicion_foto_y + dimension_foto_y):
-                    if contador == 1:
 
                         ventana.blit(imagen_iniciar_2, (posicion_foto_x, posicion_foto_y))
-                        imagen = True
-                  
+
                 else:
-                    contador = 0
-                    
-                    while imagen:      
-                
                         ventana.blit(imagen_iniciar_1, (posicion_foto_x, posicion_foto_y))
-                        imagen = False
+
 
             elif evento.type == pygame.MOUSEBUTTONDOWN:
 
@@ -80,7 +70,7 @@ def pantalla_inicio()-> pygame.Surface | None:
         
         pygame.display.update()
     
-def pantalla_seleccion_partida(ventana:pygame.surface) -> pygame.Surface | None:    
+def mostrar_pantalla_seleccion_partida(ventana:pygame.surface) -> pygame.Surface | None:    
     """Esta funcion muestra en pantalla, las partidas de usuarios anteriores, si es que lo hubieron.
 
     Args:
@@ -127,7 +117,6 @@ def pantalla_seleccion_partida(ventana:pygame.surface) -> pygame.Surface | None:
                         
                         sonido_boton_selector.play(0) 
                         sonido_boton_selector.set_volume(volumen_musica)
-
                         ventana.blit(selector_partida, (posicion_selector_1_x, posicion_selector_1_y))
                         imagen = True
                         
@@ -196,7 +185,7 @@ def pantalla_seleccion_partida(ventana:pygame.surface) -> pygame.Surface | None:
             
                     retorno = leer_datos_partida(ventana, cuarta_partida, puntaje_cuarta_partida, path_personajes_cuarta_partida, nombre_base_partida_cuarta_partida)
                     click_selector = True
-                    
+        
         if click_selector == True:
             sonido_boton_clickear.play(0)
             sonido_boton_clickear.set_volume(volumen_musica)
@@ -204,7 +193,7 @@ def pantalla_seleccion_partida(ventana:pygame.surface) -> pygame.Surface | None:
 
         pygame.display.update()
 
-def pantalla_seleccionar_skin(ventana:pygame.surface)-> None | tuple:
+def mostrar_pantalla_seleccionar_skin(ventana:pygame.surface)-> None | tuple:
     """Esta funcion muestra en pantalla las skins disponibles al usuario
 
     Args:
@@ -363,7 +352,7 @@ def pantalla_seleccionar_skin(ventana:pygame.surface)-> None | tuple:
 
         pygame.display.update()
 
-def pantalla_ingresar_nombre(ventana:pygame.surface, personaje) -> None | tuple:
+def mostrar_pantalla_ingresar_nombre(ventana:pygame.surface, personaje) -> None | tuple:
     """ Esta funcion muestra en pantalla un texto a completar por el usuario, para asignarle un nombre a la partida
 
     Args:
@@ -440,7 +429,7 @@ def pantalla_ingresar_nombre(ventana:pygame.surface, personaje) -> None | tuple:
 
         pygame.display.update()
 
-def pantalla_sala_espera(ventana:pygame.surface, personaje, puntaje:int, tiempo_promedio:float)-> None | tuple:
+def mostrar_pantalla_sala_espera(ventana:pygame.surface, personaje, puntaje:int, tiempo_promedio:float)-> None | tuple:
     """ Esta funcion muestra en pantalla 4 botones (Salir, Skins, Jugar y Borrar Partida) un leaderboard mostrando las monedas actuales, puntaje maximo blobal 
     y el promedio que tardo en responder las preguntas.
 
@@ -510,7 +499,7 @@ def pantalla_sala_espera(ventana:pygame.surface, personaje, puntaje:int, tiempo_
 
     #MUSICA
     musica_fondo_inicio.stop()
-    musica_fondo_cambio_nombre.stop()
+    musica_fondo_juego.stop()
     musica_fondo_sala_espera.stop()
     musica_fondo_sala_espera.play(-1)
     musica_fondo_sala_espera.set_volume(volumen_musica)
@@ -593,7 +582,7 @@ def pantalla_sala_espera(ventana:pygame.surface, personaje, puntaje:int, tiempo_
         
         pygame.display.update() 
 
-def pantalla_eliminar_partida(ventana:pygame.surface) -> pygame.surface:
+def mostrar_pantalla_eliminar_partida(ventana:pygame.surface) -> pygame.surface:
     """Esta funcion muestra en pantalla un cuadro de confirmacion de que si se queire borrar la partida o no
 
     Args:
@@ -694,7 +683,7 @@ def pantalla_eliminar_partida(ventana:pygame.surface) -> pygame.surface:
         
         pygame.display.update()
         
-def pantalla_game_over(ventana:pygame.surface, puntaje:int, tiempo_tardado:int)-> str | None:
+def mostrar_pantalla_game_over(ventana:pygame.surface, puntaje:int, tiempo_tardado:int)-> str | None:
     """Esta funcion muestra en pantalla una imagen (en este caso que dice "GAME OVER") y un sonido (que en este caso dice "GAME OVER").
 
     Args:
@@ -711,7 +700,7 @@ def pantalla_game_over(ventana:pygame.surface, puntaje:int, tiempo_tardado:int)-
     ventana.blit(imagen_game_over, posicion_fondo)
 
     #SE CARGA LA MUSICA
-    musica_fondo_cambio_nombre.stop()
+    musica_fondo_juego.stop()
     sonido_game_over.play(0)
     sonido_game_over.set_volume(volumen_musica)
 
@@ -720,8 +709,8 @@ def pantalla_game_over(ventana:pygame.surface, puntaje:int, tiempo_tardado:int)-
     pygame.time.set_timer(evento_volviendo_inicio, 4000)
     pygame.time.set_timer(evento_cerrar_pantalla, 8000)
 
+    # En este caso y el caso de la pantalla WINNER cambian el fondo y el color del texto por eso no estan asignadas en el modulo configuracion
     fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 48)
-    
     texto_volviendo_pantalla_principal = fuente_base.render("volviendo a la pantalla principal...", False, "Black", "White")
 
     volviendo_pantantalla = False
@@ -749,7 +738,7 @@ def pantalla_game_over(ventana:pygame.surface, puntaje:int, tiempo_tardado:int)-
             ventana.blit(texto_volviendo_pantalla_principal, (posicion_volviendo_pantalla_principal_x, posicion_volviendo_pantalla_principal_y))
         pygame.display.update()
 
-def pantalla_winner(ventana:pygame.surface)-> None | pygame.Surface:
+def mostrar_pantalla_winner(ventana:pygame.surface)-> None | pygame.Surface:
     """Esta funcion muestra en pantalla una imagen (en este caso que dice "YOU WIN") y un sonido.
 
     Args:
@@ -764,7 +753,7 @@ def pantalla_winner(ventana:pygame.surface)-> None | pygame.Surface:
     ventana.blit(imagen_winner, posicion_fondo)
 
     # SE INICIA LA MUSICA
-    musica_fondo_cambio_nombre.stop()
+    musica_fondo_juego.stop()
     sonido_winner.play(0)
     sonido_winner.set_volume(volumen_musica)
 
@@ -773,8 +762,9 @@ def pantalla_winner(ventana:pygame.surface)-> None | pygame.Surface:
     pygame.time.set_timer(evento_volviendo_inicio, 2000)
     pygame.time.set_timer(evento_cerrar_pantalla, 6000)
 
+    # En este caso y el caso de la pantalla GAME OVER cambian el fondo y el color del texto por eso no estan asignadas en el modulo configuracion
     fuente_base = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 48)
-    texto_volviendo_pantalla_principal = fuente_base.render("volviendo a la pantalla principal...", False, "White", "Black")
+    texto_volviendo_pantalla_principal = fuente_base.render("volviendo a la pantalla principal...", False, "White", "Black") 
 
     volviendo_pantantalla = False
 
@@ -803,7 +793,7 @@ def pantalla_winner(ventana:pygame.surface)-> None | pygame.Surface:
             
         pygame.display.update()
 
-def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, personaje, contador_niveles:int)-> None | tuple:
+def mostrar_pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, personaje, contador_niveles:int)-> None | tuple:
     """Esta funcion muestra en pantalla una imagen que cumple el rol de fondo (de pantalla), un cronometro para cada nivel, vidas actuaes del jugador, puntaje total de la partida,
     y cuatro imagenes de logos (que cumplen el rol de botones) al seleccionar una u otra se le descontaran / sumaran puntos, descontaran vidas, en caso de que el cronometro llegue a 0 
     se restara una vida y saldra de la funcion, en caso de que las vidas queden en 0 se llamara a la funcion mostrar_pantalla_game_over y cambiara el valor de retorno.
@@ -821,8 +811,8 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
     """
     if contador_niveles == 1:
         musica_fondo_sala_espera.stop()
-        musica_fondo_cambio_nombre.play(-1)
-        musica_fondo_cambio_nombre.set_volume(volumen_musica)
+        musica_fondo_juego.play(-1)
+        musica_fondo_juego.set_volume(volumen_musica)
 
     #SE CARGA LA FUENTE PARA EL PERSONAJE Y LAS LAS MONEDAS Y EL CRONOMETRO
     fuente = pygame.font.Font("tipografias\\UltimateGameplayer.ttf", 24)
@@ -838,19 +828,19 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
         match i:
             case 0:
                 imagen_1 = imagenes[i][0]
-                imagen_1 = pygame.transform.scale(imagen_1, (escala_imagenes_adividar))
+                imagen_1 = pygame.transform.scale(imagen_1, (diemnsion_imagenes_adividar_x, diemnsion_imagenes_adividar_y))
                 valor_imagen_verdadera_1 = imagenes[i][1]
             case 1:
                 imagen_2 = imagenes[i][0]
-                imagen_2 = pygame.transform.scale(imagen_2, (escala_imagenes_adividar))
+                imagen_2 = pygame.transform.scale(imagen_2, (diemnsion_imagenes_adividar_x, diemnsion_imagenes_adividar_y))
                 valor_imagen_verdadera_2 = imagenes[i][1]
             case 2:
                 imagen_3 = imagenes[i][0]
-                imagen_3 = pygame.transform.scale(imagen_3, (escala_imagenes_adividar))
+                imagen_3 = pygame.transform.scale(imagen_3, (diemnsion_imagenes_adividar_x, diemnsion_imagenes_adividar_y))
                 valor_imagen_verdadera_3 = imagenes[i][1]
             case 3:
                 imagen_4 = imagenes[i][0]
-                imagen_4 = pygame.transform.scale(imagen_4, (escala_imagenes_adividar))
+                imagen_4 = pygame.transform.scale(imagen_4, (diemnsion_imagenes_adividar_x, diemnsion_imagenes_adividar_y))
                 valor_imagen_verdadera_4 = imagenes[i][1]
 
     bandera_respuesta_correcta = False
@@ -882,7 +872,7 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
                 mouse_x = evento.pos[0]
                 mouse_y = evento.pos[1]
 
-                if posicion_imagen_juego_1[0] <= mouse_x <= (posicion_imagen_juego_1[0] + escala_imagenes_adividar[0]) and posicion_imagen_juego_1[1] <= mouse_y <= (posicion_imagen_juego_1[1] + escala_imagenes_adividar[1]):
+                if posicion_imagen_juego_1_x <= mouse_x <= (posicion_imagen_juego_1_x + diemnsion_imagenes_adividar_x) and posicion_imagen_juego_1_2_3_4_y <= mouse_y <= (posicion_imagen_juego_1_2_3_4_y + diemnsion_imagenes_adividar_y):
                     if valor_imagen_verdadera_1 == True:
                         
                         puntaje = modificar_puntaje(puntaje, True)
@@ -897,7 +887,7 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
                         sonido_respuesta_incorrecta.play(0)
                         sonido_respuesta_incorrecta.set_volume(volumen_musica)
 
-                elif posicion_imagen_juego_2[0] <= mouse_x <= (posicion_imagen_juego_2[0] + escala_imagenes_adividar[0]) and posicion_imagen_juego_2[1] <= mouse_y <= (posicion_imagen_juego_2[1] + escala_imagenes_adividar[1]):
+                elif posicion_imagen_juego_2_x <= mouse_x <= (posicion_imagen_juego_2_x + diemnsion_imagenes_adividar_x) and posicion_imagen_juego_1_2_3_4_y <= mouse_y <= (posicion_imagen_juego_1_2_3_4_y + diemnsion_imagenes_adividar_y):
                     if valor_imagen_verdadera_2 == True:
 
                         puntaje = modificar_puntaje(puntaje, True)
@@ -912,7 +902,7 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
                         sonido_respuesta_incorrecta.play(0)
                         sonido_respuesta_incorrecta.set_volume(volumen_musica)
                         
-                elif posicion_imagen_juego_3[0] <= mouse_x <= (posicion_imagen_juego_3[0] + escala_imagenes_adividar[0]) and posicion_imagen_juego_3[1] <= mouse_y <= (posicion_imagen_juego_3[1] + escala_imagenes_adividar[1]):
+                elif posicion_imagen_juego_3_x <= mouse_x <= (posicion_imagen_juego_3_x + diemnsion_imagenes_adividar_x) and posicion_imagen_juego_1_2_3_4_y <= mouse_y <= (posicion_imagen_juego_1_2_3_4_y + diemnsion_imagenes_adividar_y):
                     if valor_imagen_verdadera_3 == True:
 
                         puntaje = modificar_puntaje(puntaje, True)
@@ -927,7 +917,7 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
                         sonido_respuesta_incorrecta.play(0)
                         sonido_respuesta_incorrecta.set_volume(volumen_musica)
 
-                elif posicion_imagen_juego_4[0] <= mouse_x <= (posicion_imagen_juego_4[0] + escala_imagenes_adividar[0]) and posicion_imagen_juego_4[1] <= mouse_y <= (posicion_imagen_juego_4[1] + escala_imagenes_adividar[1]):
+                elif posicion_imagen_juego_4_x <= mouse_x <= (posicion_imagen_juego_4_x + diemnsion_imagenes_adividar_x) and posicion_imagen_juego_1_2_3_4_y <= mouse_y <= (posicion_imagen_juego_1_2_3_4_y + diemnsion_imagenes_adividar_y):
                     if valor_imagen_verdadera_4 == True:
 
                         puntaje = modificar_puntaje(puntaje, True)
@@ -971,10 +961,10 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
         ventana.blit(texto_cronometro, (posicion_cronometro_x + 71, posicion_cronometro_y + 65))
         
         #BLIT DE LOS LOGOS PARA ELEGIR
-        ventana.blit(imagen_1, posicion_imagen_juego_1)
-        ventana.blit(imagen_2, posicion_imagen_juego_2)
-        ventana.blit(imagen_3, posicion_imagen_juego_3)
-        ventana.blit(imagen_4, posicion_imagen_juego_4)
+        ventana.blit(imagen_1, (posicion_imagen_juego_1_x, posicion_imagen_juego_1_2_3_4_y))
+        ventana.blit(imagen_2, (posicion_imagen_juego_2_x, posicion_imagen_juego_1_2_3_4_y))
+        ventana.blit(imagen_3, (posicion_imagen_juego_3_x, posicion_imagen_juego_1_2_3_4_y))
+        ventana.blit(imagen_4, (posicion_imagen_juego_4_x, posicion_imagen_juego_1_2_3_4_y))
 
         match vidas:
             case 5:
@@ -997,7 +987,7 @@ def pantalla_juego(ventana:pygame.surface, puntaje:int, vidas:int, marca:str, pe
             retorno = ventana, puntaje, vidas, tiempo_tardado
 
         if vidas == 0 :
-            retorno = pantalla_game_over(ventana, puntaje, tiempo_tardado) 
+            retorno = mostrar_pantalla_game_over(ventana, puntaje, tiempo_tardado) 
 
         if bandera_respuesta_correcta == True or vidas == 0:
             return retorno
