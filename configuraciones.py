@@ -166,11 +166,11 @@ posicion_texto_2_dialogo_largo_y = ALTURA / 2
 posicion_marcos_logos_x = ANCHO / 8.5
 posicion_marcos_logos_y = ALTURA / 1.43
 
-posicion_imagen_juego_1_x = 170
-posicion_imagen_juego_2_x = 425
-posicion_imagen_juego_3_x = 683
-posicion_imagen_juego_4_x = 938
-posicion_imagen_juego_1_2_3_4_y = 520
+posicion_imagen_juego_1_x = ANCHO / 7.529
+posicion_imagen_juego_2_x = ANCHO / 3.0118
+posicion_imagen_juego_3_x = ANCHO / 1.874
+posicion_imagen_juego_4_x = ANCHO / 1.364
+posicion_imagen_juego_1_2_3_4_y = ALTURA / 1.385
 
 posicion_monedas_x = ANCHO / 27
 posicion_monedas_y = ALTURA / 9
