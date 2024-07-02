@@ -12,7 +12,6 @@
 Clona el repositorio:
    ```bash
    git clone https://github.com/Keruza3/Proyecto-python-juego
-    
   ```
 ## Uso
 ### Cómo Jugar
@@ -34,7 +33,6 @@ Mouse: Navegar por los menús y seleccionar opciones
 #### Promedio de tiempo de respuesta: Indica el tiempo promedio que tardas en responder cada logo.
 
 # Imagenes
-
 ![Menu Principal](imagenes/fotos_readme/menu_principal.jpg)
 ![Selector de Partidas](imagenes/fotos_readme/Selector_de_partidas.jpg)
 ![Nombre de Partida](imagenes/fotos_readme/Nombre_de_partida.jpg)
